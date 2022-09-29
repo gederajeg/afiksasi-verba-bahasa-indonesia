@@ -1,0 +1,192 @@
+library(tidyverse)#
+library(tidytext)
+mmorph <- readr::read_tsv("https://raw.githubusercontent.com/matbahasa/MALINDO_Morph/master/malindo_dic_20211116.tsv", col_names = c("id", "root", "word_form", "pref_procl", "suff_encl", "confix", "reduplication", "source", "stem", "lemma"))#
+#
+# remove the Malay source and only select the "checked" entries#
+mmorph_id <- mmorph %>% filter(str_detect(source, "^Melayu", TRUE), str_detect(id, "^ex", TRUE))#
+#
+# tokenise the corpus#
+koran <- readr::read_rds("A_Koran.rds")#
+koran_toks <- koran %>% #
+	unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)
+koran_toks
+koran_toks %>% count(word_token, sort = TRUE)
+koran_toks %>% count(file_id, word_token, sort = TRUE)
+kan_only <- mmorph_id %>% filter(suff_encl == "-kan") %>% pull(word_form)
+koran_toks_count %>% filter(str_detect(word_form, kan_only))
+koran_toks_count <- koran_toks %>% count(file_id, word_token, sort = TRUE)
+koran_toks_count
+koran_toks_count %>% filter(str_detect(word_form, kan_only))
+koran_toks_count %>% filter(str_detect(word_token, kan_only))
+kan_only_rgx <- paste("(?i)(", paste(kan_only, collapse = "|"), ")", sep = "")
+koran_toks_count %>% filter(str_detect(word_token, kan_only))
+koran_toks_count %>% filter(str_detect(word_token, kan_only_rgx))
+koran <- readr::read_rds("A_Koran.rds")#
+koran_toks <- koran %>% #
+	unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+koran_toks_count <- koran_toks %>% count(file_id, word_token, sort = TRUE)
+library(tidyverse)#
+library(tidytext)
+koran <- readr::read_rds("A_Koran.rds")#
+koran_toks <- koran %>% #
+	unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+koran_toks_count <- koran_toks %>% count(file_id, word_token, sort = TRUE)
+koran_toks_count
+koran_toks_count_all <- koran_toks_count %>% group_by(word_token) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(desc(n))
+koran_toks_count_all
+mmorph <- readr::read_tsv("https://raw.githubusercontent.com/matbahasa/MALINDO_Morph/master/malindo_dic_20211116.tsv", col_names = c("id", "root", "word_form", "pref_procl", "suff_encl", "confix", "reduplication", "source", "stem", "lemma"))#
+#
+# remove the Malay source and only select the "checked" entries#
+mmorph_id <- mmorph %>% filter(str_detect(source, "^Melayu", TRUE), str_detect(id, "^ex", TRUE))
+kan_only <- mmorph_id %>% filter(suff_encl == "-kan") %>% pull(word_form)#
+kan_only_rgx <- paste("(?i)(", paste(kan_only, collapse = "|"), ")", sep = "")#
+koran_kan_df <- koran_toks_count %>% filter(str_detect(word_token, kan_only_rgx``))
+mmorph <- readr::read_tsv("https://raw.githubusercontent.com/matbahasa/MALINDO_Morph/master/malindo_dic_20211116.tsv", col_names = c("id", "root", "word_form", "pref_procl", "suff_encl", "confix", "reduplication", "source", "stem", "lemma"))#
+#
+# remove the Malay source and only select the "checked" entries#
+mmorph_id <- mmorph %>% filter(str_detect(source, "^Melayu", TRUE), str_detect(id, "^ex", TRUE))#
+#
+# tokenise the corpus#
+koran <- readr::read_rds("A_Koran.rds")#
+koran_toks <- koran %>% #
+	unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+koran_toks_count <- koran_toks %>% count(file_id, word_token, sort = TRUE)#
+koran_toks_count_all <- koran_toks_count %>% group_by(word_token) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(desc(n))#
+# get words for certain affix#
+## example, retrieve the word_form with -KAN suffix from mmorph_id#
+kan_only <- mmorph_id %>% filter(suff_encl == "-kan") %>% pull(word_form)#
+kan_only_rgx <- paste("(?i)(", paste(kan_only, collapse = "|"), ")", sep = "")
+koran_kan_df <- koran_toks_count_all %>% filter(str_detect(word_token, kan_only_rgx``))
+koran_kan_df <- koran_toks_count_all %>% filter(str_detect(word_token, kan_only_rgx))
+koran_kan_df
+koran_kan_df %>% filter(str_detect(word_token, "^b"))
+koran_kan_df %>% filter(str_detect(word_token, "^t"))
+koran_kan_df %>% filter(n < 2)
+kan_only_rgx <- paste("^(?i)(", paste(kan_only, collapse = "|"), ")$", sep = "")
+koran_toks_count_all %>% filter(str_detect(word_token, kan_only_rgx))
+koran_toks_count_all %>% filter(str_detect(word_token, kan_only_rgx)) %>% filter(n<2)
+koran_toks_count_all %>% filter(str_detect(word_token, kan_only_rgx)) %>% filter(n<2, str_detect(word_token, "^b"))
+koran_toks_count_all %>% filter(str_detect(word_token, kan_only_rgx)) %>% filter(n<2, str_detect(word_token, "^(?i)b"))
+library(tidyverse)#
+library(tidytext)#
+#
+corpuspath <- dir(recursive = TRUE, pattern = ".txt")#
+#
+metadata_path <- dir(recursive = TRUE, pattern = ".xlsx")#
+#
+genres_df <- data.frame(genres = unique(str_extract(corpuspath, "(?<=\\/)[A-Z]\\.\\s[^0-9]+(?=\\s\\d)")))#
+#
+genres_df <- genres_df %>% separate(genres, c("id", "genre"), "\\.\\s", remove = FALSE)#
+#
+genres <- genres_df[[1]]#
+genres_file_names <- str_replace_all(str_replace_all(str_replace(genres, "\\.\\s", "_"), "[,-]\\s?", "_"), "\\s", "_")#
+genres_file_names_save <- paste(genres_file_names, ".rds", sep = "")#
+#
+years <- paste("20", 11:20, sep = "")
+koran <- readr::read_rds(genres_file_names_save[1])#
+majalah <- readr::read_rds(genres_file_names_save[2])
+majalah
+mmorph <- readr::read_tsv("https://raw.githubusercontent.com/matbahasa/MALINDO_Morph/master/malindo_dic_20211116.tsv", col_names = c("id", "root", "word_form", "pref_procl", "suff_encl", "confix", "reduplication", "source", "stem", "lemma"))#
+#
+# remove the Malay source and only select the "checked" entries#
+mmorph_id <- mmorph %>% filter(str_detect(source, "^Melayu", TRUE), str_detect(id, "^ex", TRUE))
+mmorph_id
+mmorph_id %>% count(pref_procl, sort = TRUE)
+mmorph_id %>% filter(pref_procl != "0") %>% count(pref_procl, sort = TRUE)
+mmorph_id %>% filter(pref_procl != "0") %>% count(pref_procl, sort = TRUE) %>% tail()
+mmorph_id %>% filter(pref_procl != "0") %>% count(pref_procl, sort = TRUE) %>% as.data.frame()
+mmorph_id %>% filter(pref_procl == "meN-+meN-")
+mmorph_id %>% filter(pref_procl == "se-@0")
+mmorph_id %>% filter(pref_procl == "se-+N-")
+mmorph_id %>% filter(pref_procl == "meN-+ke")
+mmorph_id %>% filter(pref_procl == "meN-+per-")
+disertasi_tesis_skripsi <- readr::read_rds(genres_file_names_save[7])
+tesis <- readr::read_rds(genres_file_names_save[7])
+buku <- readr::read_rds(genres_file_names_save[5])
+koran <- readr::read_rds(genres_file_names_save[1])#
+majalah <- readr::read_rds(genres_file_names_save[2])#
+cerpen <- readr::read_rds(genres_file_names_save[3])#
+novel <- readr::read_rds(genres_file_names_save[4])#
+buku <- readr::read_rds(genres_file_names_save[5])#
+jurnal <- readr::read_rds(genres_file_names_save[6])#
+tesis <- readr::read_rds(genres_file_names_save[7])#
+biografi <- readr::read_rds(genres_file_names_save[8])#
+populer <- readr::read_rds(genres_file_names_save[9])#
+uud <- readr::read_rds(genres_file_names_save[10])#
+laman <- readr::read_rds(genres_file_names_save[11])#
+surat <- readr::read_rds(genres_file_names_save[12])
+koran_toks <- koran %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+majalah_toks <- majalah %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+cerpen_toks <- cerpen %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+novel_toks <- novel %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+buku_toks <- buku %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+jurnal_toks <- jurnal %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+tesis_toks <- tesis %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)
+biografi_toks <- biografi %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)
+koran <- readr::read_rds(genres_file_names_save[1])#
+majalah <- readr::read_rds(genres_file_names_save[2])#
+cerpen <- readr::read_rds(genres_file_names_save[3])#
+novel <- readr::read_rds(genres_file_names_save[4])#
+buku <- readr::read_rds(genres_file_names_save[5])#
+jurnal <- readr::read_rds(genres_file_names_save[6])#
+tesis <- readr::read_rds(genres_file_names_save[7])#
+biografi <- readr::read_rds(genres_file_names_save[8])#
+populer <- readr::read_rds(genres_file_names_save[9])#
+uud <- readr::read_rds(genres_file_names_save[10])#
+laman <- readr::read_rds(genres_file_names_save[11])#
+surat <- readr::read_rds(genres_file_names_save[12])
+koran_toks <- koran %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+majalah_toks <- majalah %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+cerpen_toks <- cerpen %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+novel_toks <- novel %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+buku_toks <- buku %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+jurnal_toks <- jurnal %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+tesis_toks <- tesis %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+biografi_toks <- biografi %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+populer_toks <- populer %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+uud_toks <- uud %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+laman_toks <- laman %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+surat_toks <- surat %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)
+majalah_toks_count <- majalah_toks %>% count(file_id, word_form, sort = TRUE)#
+majalah_toks_count_all <- majalah_toks_count %>% group_by(word_token) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(desc(n))
+koran_toks <- koran %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+majalah_toks <- majalah %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+cerpen_toks <- cerpen %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+novel_toks <- novel %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+buku_toks <- buku %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+jurnal_toks <- jurnal %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+tesis_toks <- tesis %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+biografi_toks <- biografi %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+populer_toks <- populer %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+uud_toks <- uud %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+laman_toks <- laman %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+surat_toks <- surat %>% unnest_tokens(word_token, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)
+koran_toks <- koran %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+majalah_toks <- majalah %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+cerpen_toks <- cerpen %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+novel_toks <- novel %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+buku_toks <- buku %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+jurnal_toks <- jurnal %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+tesis_toks <- tesis %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+biografi_toks <- biografi %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+populer_toks <- populer %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+uud_toks <- uud %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+laman_toks <- laman %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)#
+surat_toks <- surat %>% unnest_tokens(word_form, bodytext, token = "regex", pattern = "([^A-Z0-9a-z-]|--)", to_lower = FALSE)
+koran_toks_count <- koran_toks %>% count(file_id, word_form, sort = TRUE)#
+koran_toks_count_all <- koran_toks_count %>% group_by(word_token) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(desc(n))#
+#
+majalah_toks_count <- majalah_toks %>% count(file_id, word_form, sort = TRUE)#
+majalah_toks_count_all <- majalah_toks_count %>% group_by(word_token) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(desc(n))
+koran_toks_count <- koran_toks %>% count(file_id, word_form, sort = TRUE)#
+koran_toks_count_all <- koran_toks_count %>% group_by(word_form) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(desc(n))#
+#
+majalah_toks_count <- majalah_toks %>% count(file_id, word_form, sort = TRUE)#
+majalah_toks_count_all <- majalah_toks_count %>% group_by(word_form) %>% summarise(n = sum(n), .groups = "drop") %>% arrange(desc(n))
+majalah_toks_count_all
+majalah_toks_count_all %>% filter(str_detect(word_form, "^ber.+?kan$"))
+koran_toks_count_all %>% filter(str_detect(word_form, "^ber.+?kan$"))
+koran_toks_count_all %>% filter(str_detect(word_form, "^ber.{3,}kan$"))
+majalah_toks_count_all %>% filter(str_detect(word_form, "^ber.{3,}kan$"))
+binom.test(c(35, 52))
+load("/Users/Primahadi/Documents/research/2022-07-30-tatabahasa-indonesia-kontemporer/freqlist_all.rds")
