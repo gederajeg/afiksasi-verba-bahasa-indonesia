@@ -1,4 +1,4 @@
-cff-version: 1.2.0
+cff-version: 1.1.0
 message: "If you use materials and data from this repository, please cite them as below."
 authors:
   - family-names: Rajeg
@@ -8,8 +8,5 @@ authors:
     given-names: Karlina
     orcid: https://orcid.org/0000-0002-1060-3548
 title: "Material pendukung untuk 'Afiksasi Verba dalam Bahasa Indonesia'"
-version: 1.0
-doi: 10.17605/OSF.IO/NUXD4
+version: 0.0.1
 date-released: 2022-10-01
-license: CC-BY-NC-SA
-repository-code: "https://github.com/gederajeg/afiksasi-verba-bahasa-indonesia"
