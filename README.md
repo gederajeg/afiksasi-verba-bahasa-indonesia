@@ -28,4 +28,10 @@ makalah yang berjudul *Afiksasi verba dalam bahasa Indonesia*. Makalah
 ini menjadi bagian dari proyek buku Tatabahasa Bahasa Indonesia
 Kontemporer (TBIK) berbasis korpus. Bahan pendukung dari makalah kami
 yang lain untuk proyek buku yang sama dapat diakses melalui [tautan
-berikut](https://osf.io/84zfw/).
+berikut](https://osf.io/84zfw/). Berikut ini adalah cara mengutip
+repositori ini (dengan selingkung APA) jika menggunakan material di
+dalamnya:
+
+> Rajeg, G. P. W., & Denistia, K. (2022). Material pendukung untuk
+> ‘Afiksasi Verba dalam Bahasa Indonesia’ (Version 0.0.1) \[Computer
+> software\]. <https://doi.org/10.17605/OSF.IO/NUXD4>
