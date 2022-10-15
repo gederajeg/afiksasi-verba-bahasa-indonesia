@@ -1,6 +1,6 @@
 ---
 output: github_document
-date: '1 Oktober 2022'
+date: '15 Oktober 2022'
 title: 'Material pendukung untuk "Afiksasi Verba dalam Bahasa Indonesia"'
 author: '[Gede Primahadi Wijaya Rajeg](https://udayananetworking.unud.ac.id/lecturer/880-gede-primahadi-wijaya-rajeg) <a itemprop="sameAs" content="https://orcid.org/0000-0002-2047-8621" href="https://orcid.org/0000-0002-2047-8621" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a> & [Karlina Denistia](https://www.researchgate.net/profile/Karlina-Denistia) <a itemprop="sameAs" content="http://orcid.org/0000-0002-1060-3548" href="http://orcid.org/0000-0002-1060-3548" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>'
 ---
@@ -24,6 +24,6 @@ knitr::opts_chunk$set(
 
 Repositori ini membagikan bahan pendukung (data, [grafik statistik](https://github.com/gederajeg/afiksasi-verba-bahasa-indonesia/tree/main/figures), dan [kode](https://github.com/gederajeg/afiksasi-verba-bahasa-indonesia/blob/main/6-3-analysis.R) pemrograman R untuk analisis statistik dan visualisasi) dari makalah yang berjudul *Afiksasi verba dalam bahasa Indonesia*. Makalah ini menjadi bagian dari proyek buku Tatabahasa Bahasa Indonesia Kontemporer (TBIK) berbasis korpus. Bahan pendukung dari makalah kami yang lain untuk proyek buku yang sama dapat diakses melalui [tautan berikut](https://osf.io/84zfw/). Berikut ini adalah cara mengutip repositori ini (dengan selingkung sitiran [APA](https://apastyle.apa.org/style-grammar-guidelines/references/examples)) jika menggunakan material di dalamnya dalam publikasi/presentasi/pengajaran:
 
-> Rajeg, G. P. W., & Denistia, K. (2022). Material pendukung untuk 'Afiksasi Verba dalam Bahasa Indonesia' (Version 0.0.1) [Computer software]. https://doi.org/10.17605/OSF.IO/NUXD4
+> Rajeg, G. P. W., & Denistia, K. (2022). Material pendukung untuk 'Afiksasi Verba dalam Bahasa Indonesia' (Version 0.0.2) [Computer software]. https://doi.org/10.17605/OSF.IO/NUXD4
 
 

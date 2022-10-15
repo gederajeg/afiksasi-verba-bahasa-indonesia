@@ -6,7 +6,7 @@ Rajeg](https://udayananetworking.unud.ac.id/lecturer/880-gede-primahadi-wijaya-r
 & [Karlina
 Denistia](https://www.researchgate.net/profile/Karlina-Denistia)
 <a itemprop="sameAs" content="http://orcid.org/0000-0002-1060-3548" href="http://orcid.org/0000-0002-1060-3548" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
-1 Oktober 2022
+15 Oktober 2022
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -39,5 +39,5 @@ jika menggunakan material di dalamnya dalam
 publikasi/presentasi/pengajaran:
 
 > Rajeg, G. P. W., & Denistia, K. (2022). Material pendukung untuk
-> ‘Afiksasi Verba dalam Bahasa Indonesia’ (Version 0.0.1) \[Computer
+> ‘Afiksasi Verba dalam Bahasa Indonesia’ (Version 0.0.2) \[Computer
 > software\]. <https://doi.org/10.17605/OSF.IO/NUXD4>
