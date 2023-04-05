@@ -1079,7 +1079,7 @@ p <- wclass_with_kan1 %>%
   filter(!freq_profile %in% c("tokens", "types", "hapaxes")) %>% 
   droplevels() %>% 
   mutate(freq_labels = "Frekuensi token relatif (per 1 juta kata)",
-         freq_labels = if_else(freq_profile == "types_root_pmw", 
+         freq_labels = if_else(freq_profile == "types_pmw", 
                                "Frekuensi tipe relatif (per 1 juta kata)", 
                                freq_labels),
          freq_labels = if_else(freq_profile == "hapax_pmw", 
@@ -1087,7 +1087,7 @@ p <- wclass_with_kan1 %>%
                                freq_labels)) %>% 
   split(.$freq_profile) %>% 
   map(# ~ggplot(., aes(x = reorder(affix_morphind, values), y = values, fill = colvals)) + 
-    ~ggplot(., aes(x = affix_morphind, y = vals, fill = root_pos_morphind)) + 
+     ~ggplot(., aes(x = affix_morphind, y = vals, fill = root_pos_morphind)) + 
       geom_col(position = "dodge") + 
       theme_light() +
       scale_fill_manual(values = .$colvals) +
@@ -1194,12 +1194,13 @@ p <- wclass_with_i1 %>%
   filter(!freq_profile %in% c("tokens", "types", "hapaxes")) %>% 
   droplevels() %>% 
   mutate(freq_labels = "Frekuensi token relatif (per 1 juta kata)",
-         freq_labels = if_else(freq_profile == "types_root_pmw", 
+         freq_labels = if_else(freq_profile == "types_pmw", 
                                "Frekuensi tipe relatif (per 1 juta kata)", 
                                freq_labels),
          freq_labels = if_else(freq_profile == "hapax_pmw", 
                                "Hapax relatif (per 1 juta kata)", 
                                freq_labels)) %>% 
+  mutate(root_pos_morphind = fct_relevel(root_pos_morphind, "n", "v")) %>% 
   split(.$freq_profile) %>% 
   map(# ~ggplot(., aes(x = reorder(affix_morphind, values), y = values, fill = colvals)) + 
     ~ggplot(., aes(x = affix_morphind, y = vals, fill = root_pos_morphind)) + 
