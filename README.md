@@ -6,7 +6,7 @@ Rajeg](https://udayananetworking.unud.ac.id/lecturer/880-gede-primahadi-wijaya-r
 & [Karlina
 Denistia](https://www.researchgate.net/profile/Karlina-Denistia)
 <a itemprop="sameAs" content="http://orcid.org/0000-0002-1060-3548" href="http://orcid.org/0000-0002-1060-3548" target="orcid.widget" rel="noopener noreferrer" style="vertical-align:top;"><img src="https://orcid.org/sites/default/files/images/orcid_16x16.png" style="width:1em;margin-right:.5em;" alt="ORCID iD icon"></a>
-15 Oktober 2022
+10 April 2023
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
@@ -29,16 +29,22 @@ statistik](https://github.com/gederajeg/afiksasi-verba-bahasa-indonesia/tree/mai
 dan
 [kode](https://github.com/gederajeg/afiksasi-verba-bahasa-indonesia/blob/main/6-3-analysis.R)
 pemrograman R untuk analisis statistik dan visualisasi) dari makalah
-yang berjudul *Afiksasi verba dalam bahasa Indonesia*. Makalah ini
+kami yang berjudul *Afiksasi verba dalam bahasa Indonesia*. Makalah ini
 menjadi bagian dari proyek buku Tatabahasa Bahasa Indonesia Kontemporer
-(TBIK) berbasis korpus. Bahan pendukung dari makalah kami yang lain
-untuk proyek buku yang sama dapat diakses melalui [tautan
-berikut](https://osf.io/84zfw/). Berikut ini adalah cara mengutip
-repositori ini (dengan selingkung sitiran
+(TBIK) berbasis korpus ([flyer seminar
+hasil](https://www.facebook.com/photo?fbid=581508360693816&set=a.227078366136819)).
+Bahan pendukung dari makalah kami yang lain untuk proyek buku yang sama
+dapat diakses melalui [tautan berikut](https://osf.io/84zfw/). Saksikan
+rekaman presentasi seminar hasil makalah kami pada tautan
+[ini](https://www.youtube.com/live/fD70Nhs6vug?feature=share&t=6340)
+(*Afiksasi verba dalam bahasa Indonesia*) dan
+[ini](https://www.youtube.com/live/fD70Nhs6vug?feature=share&t=4981)
+(*Afiksasi nomina dalam bahasa Indonesia*). Berikut ini adalah cara
+mengutip repositori ini (dengan selingkung sitiran
 [APA](https://apastyle.apa.org/style-grammar-guidelines/references/examples))
 jika menggunakan material di dalamnya dalam
 publikasi/presentasi/pengajaran:
 
-> Rajeg, G. P. W., & Denistia, K. (2022). Material pendukung untuk
-> ‘Afiksasi Verba dalam Bahasa Indonesia’ (Version 0.0.2) \[Computer
+> Rajeg, G. P. W., & Denistia, K. (2023). Material pendukung untuk
+> ‘Afiksasi Verba dalam Bahasa Indonesia’ (Version 0.0.3) \[Computer
 > software\]. <https://doi.org/10.17605/OSF.IO/NUXD4>
