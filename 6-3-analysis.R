@@ -7,6 +7,7 @@ library(tidyverse)
 library(gridExtra)
 library(ggrepel)
 library(RColorBrewer)
+library(effsize)
 
 # verbs <- readr::read_tsv("verbs_main.txt")
 verbs <- readr::read_rds("verbs_main.rds")
@@ -26,12 +27,14 @@ corpussizes_all <- as.numeric(readr::read_lines("corpussizes_all.txt"))
 ## tokens
 verbs_tokens_dbase_total <- sum(verbs$n)
 verbs_tokens_dbase_total
+prettyNum(verbs_tokens_dbase_total, big.mark = ".", decimal.mark = ",")
 ## types
 verbs_types_dbase_total <- verbs %>% 
-  group_by(pref_morphind, root_morphind, suff_morphind) %>% 
+  select(pref_morphind, root_morphind, suff_morphind) %>% 
   distinct() %>% 
   nrow()
 verbs_types_dbase_total
+prettyNum(verbs_types_dbase_total, big.mark = ".", decimal.mark = ",")
 ## hapax legomena
 verbs_hapax_dbase_total <- verbs %>% 
   group_by(pref_morphind, root_morphind, suff_morphind) %>% 
@@ -39,6 +42,8 @@ verbs_hapax_dbase_total <- verbs %>%
   filter(n == 1) %>% 
   nrow()
 verbs_hapax_dbase_total
+prettyNum(verbs_hapax_dbase_total, big.mark = ".", decimal.mark = ",")
+
 
 # Create the content of "Tabel 1." ========
 # samples_of_database <- verbs %>%
@@ -305,6 +310,7 @@ correlation_analysis_df <- overall_prods %>%
   filter(str_detect(freq_profile, '(perc|htr_|wordform)', TRUE)) %>% 
   select(dbase, affix_morphind, freq_profile, values) %>% 
   pivot_wider(names_from = "freq_profile", values_from = "values")
+correlation_analysis_df
 
 ##### 3.3.1 cor.test ME- and DI- subtypes========
 me_df <- correlation_analysis_df %>% 
@@ -466,6 +472,15 @@ cor.test(as.numeric(ber$year), ber$pmw, method = "kendall")
 ter <- filter(year_prods, affix_morphind == "ter-_0", freq_profile == "tokens")
 cor.test(as.numeric(ter$year), ter$pmw, method = "kendall")
 
+###### 4.1.2 T-test for relative token frequency of di vs. di-/-kan ==========
+di_di_kan_token_ttest_df <- bind_rows(di, di_kan) %>% 
+  mutate(affix_morphind = factor(affix_morphind, levels = c("di-_0", "di-_kan"))) %>% 
+  select(affix_morphind, pmw)
+di_di_kan_token_ttest_df 
+di_di_kan_token_ttest <- t.test(di_di_kan_token_ttest_df$pmw~di_di_kan_token_ttest_df$affix_morphind, alternative = "two.sided", paired = FALSE) 
+di_di_kan_token_ttest # significantly different
+cohen_d <- effsize::cohen.d(di$pmw, di_kan$pmw)
+cohen_d # large effect size (large frequency different)
 
 ##### 4.2 type frequency ==========
 type_plots <- year_prods %>% 
@@ -544,6 +559,15 @@ ter <- filter(year_prods, affix_morphind == "ter-_0", freq_profile == "types_roo
 cor.test(as.numeric(ter$year), ter$pmw, method = "kendall")
 cor.test(as.numeric(ter$year), ter$pmw, method = "kendall")$p.value < 0.05
 cor.test(as.numeric(ter$year), ter$pmw, method = "kendall")$estimate < -0.5
+
+###### 4.2.2 T-test for relative type frequency of di vs. di-/-kan ==========
+di_di_kan_type_ttest_df <- bind_rows(di, di_kan) %>% 
+  mutate(affix_morphind = factor(affix_morphind, levels = c("di-_0", "di-_kan"))) %>% 
+  select(affix_morphind, pmw)
+di_di_kan_type_ttest <- t.test(di_di_kan_type_ttest_df$pmw~di_di_kan_type_ttest_df$affix_morphind, alternative = "two.sided", paired = FALSE) 
+di_di_kan_type_ttest # not significantly different
+cohen_d <- effsize::cohen.d(di$pmw, di_kan$pmw)
+cohen_d # large effect size (large frequency different)
 
 ##### 4.3 hapax frequency ==========
 hapax_plots <- year_prods %>% 
