@@ -198,10 +198,10 @@ verbs <- verbs %>%
                                          str_replace(affix_morphind_wclass, "_n_", "_v_"),
                                          affix_morphind_wclass),
          
-         morphind = if_else(word_form %in% c("menanyai", "menanyakan"), 
+         morphind = if_else(word_form %in% c("menanyai", "menanyakan", "menanya"), 
                             str_replace_all(morphind, "(?<=\\+)(nanya)(?=<v>)", "tanya"), 
                             morphind),
-         root_morphind = if_else(word_form %in% c("menanyai", "menanyakan"),
+         root_morphind = if_else(word_form %in% c("menanyai", "menanyakan", "menanya"),
                                  str_replace(root_morphind, "^nanya$", "tanya"),
                                  root_morphind),
          
