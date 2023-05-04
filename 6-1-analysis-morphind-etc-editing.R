@@ -198,6 +198,20 @@ verbs <- verbs %>%
                                          str_replace(affix_morphind_wclass, "_n_", "_v_"),
                                          affix_morphind_wclass),
          
+         morphind = if_else(word_form %in% c("menanyai", "menanyakan"), 
+                            str_replace_all(morphind, "(?<=\\+)(nanya)(?=<v>)", "tanya"), 
+                            morphind),
+         root_morphind = if_else(word_form %in% c("menanyai", "menanyakan"),
+                                 str_replace(root_morphind, "^nanya$", "tanya"),
+                                 root_morphind),
+         
+         morphind = if_else(word_form %in% c("menerabas"), 
+                            str_replace_all(morphind, "(?<=\\+)(nerabas)(?=<v>)", "terabas"), 
+                            morphind),
+         root_morphind = if_else(word_form %in% c("menerabas"),
+                                 str_replace(root_morphind, "^nerabas$", "terabas"),
+                                 root_morphind),
+         
          morphind = replace(morphind, word_form=='berjual-beli', "ber+jualbeli<n>_VSA"),
          root_morphind = replace(root_morphind, word_form %in% c("berjual-beli"), "jualbeli"),
          root_pos_morphind = replace(root_pos_morphind, word_form %in% c("berjual-beli"), "n"),
