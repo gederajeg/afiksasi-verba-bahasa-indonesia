@@ -1,6 +1,6 @@
 # script to edit morphind tag, wordclass, etc. from within the 6-analysis.R data
 verbs <- verbs %>% 
-  filter(!word_form %in% c("memperikan", "dipertim", 
+  filter(!word_form %in% c("memperikan", "dipertim", "dipin",
                            "berdoa-menataptersenyum-berjalan", "berkai-kali", "berusahan",
                            "teras-stupa", "terdidik-tercerahkan", "termi-nologi", 
                            "tergan-tung", "terlintas-linlas", "terburu-burumerealisasi",
@@ -143,6 +143,16 @@ verbs <- verbs %>%
                                          word_form  %in% c("diperbaiki", "diperbaikii"), 
                                          "di-+per-_a_i"),
          
+         root_morphind = replace(root_morphind, root_morphind == "disain", "desain"),
+         morphind = if_else(str_detect(morphind, "(?<=\\+)disain(?=\\<n\\>)"),
+                            str_replace(morphind, "(?<=\\+)disain(?=\\<n\\>)", "desain"),
+                            morphind),
+         
+         root_morphind = replace(root_morphind, root_morphind == "ijin", "izin"),
+         morphind = if_else(str_detect(morphind, "(?<=\\+)ijin(?=\\<n\\>)"),
+                            str_replace(morphind, "(?<=\\+)ijin(?=\\<n\\>)", "izin"),
+                            morphind),
+         
          morphind = replace(morphind, word_form == "memasak", "meN+masak<v>_VSA"),
          root_morphind = replace(root_morphind, word_form %in% c("memasak"), "masak"),
          root_pos_morphind = replace(root_pos_morphind, word_form %in% c("memasak"), "v"),
@@ -241,6 +251,17 @@ verbs <- verbs %>%
                                          str_replace_all(affix_morphind_wclass,
                                                          "_v_", "_n_"),
                                          affix_morphind_wclass),
+         
+         word_form = replace(word_form, word_form=="terangin", "diterangin"),
+         morphind = replace(morphind, word_form=="diterangin", "di+terang<a>+in_VSP"),
+         root_morphind = replace(root_morphind, word_form=="diterangin", "terang"),
+         root_pos_morphind = replace(root_pos_morphind, word_form=="diterangin", "a"),
+         pref_morphind = replace(pref_morphind, word_form=="diterangin", "di-"),
+         suff_morphind = replace(suff_morphind, word_form=="diterangin", "in"),
+         affix_morphind_wclass = replace(affix_morphind_wclass, word_form=="diterangin", "di-_a_in"),
+         affix_morphind = replace(affix_morphind, word_form=="diterangin", "di-_in"),
+         dbase = replace(dbase, word_form=="diterangin", "di"),
+         verb_tagged = replace(verb_tagged, word_form=="diterangin", TRUE),
          
          morphind = replace(morphind, word_form=='berjual-beli', "ber+jualbeli<n>_VSA"),
          root_morphind = replace(root_morphind, word_form %in% c("berjual-beli"), "jualbeli"),
