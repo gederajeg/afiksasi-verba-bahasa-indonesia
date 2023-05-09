@@ -203,7 +203,7 @@ verbs <- verbs %>%
          morphind = replace(morphind, word_form %in% c("terperinci"), "ter+per+rinci<a>_VSP"),
          root_morphind = replace(root_morphind, word_form %in% c("terperinci"), "rinci"),
          root_pos_morphind = replace(root_pos_morphind, word_form == "terperinci", "a"),
-         pref_morphind = replace(pref_morphind, word_form %in% c("terperinci"), "ter-"),
+         pref_morphind = replace(pref_morphind, word_form %in% c("terperinci"), "ter-+per-"),
          suff_morphind = replace(suff_morphind, word_form %in% c("terperinci"), "0"),
          affix_morphind = replace(affix_morphind, word_form %in% c("terperinci"), "ter-+per-_0"),
          affix_morphind_wclass = replace(affix_morphind_wclass, word_form %in% c("terperinci"), "ter-+per-_a_0"),
