@@ -13,7 +13,8 @@ verbs <- verbs %>%
                            "berkedu-dukan", "berkelan-jutan", "ber-saing", 
                            "ber-tumpu", "ber-tindak", "berkontri-busi", 
                            "berlan", "berandan", "bersaman", 
-                           "bersenjata-kelihatan", "berpan", "berbelan-", "bermaian")) %>% 
+                           "bersenjata-kelihatan", "berpan", "berbelan-", "bermaian",
+                           "diempat")) %>% 
   mutate(morphind = str_replace_all(morphind, "(?<=\\+)jerit\\<v\\>", "jerit<n>"),
          morphind = replace(morphind, word_form=='menjerit-jerit', "meN+jerit<n>_VPA"),
          root_pos_morphind = ifelse(root_morphind == "jerit", "n", root_pos_morphind),
@@ -134,6 +135,15 @@ verbs <- verbs %>%
          affix_morphind_wclass = replace(affix_morphind_wclass, 
                                          word_form == "memerhatikannya", "meN-+per-_n_kan"),
          
+         morphind = replace(morphind, word_form == "diempati", "di+empati<n>_VSP"),
+         root_morphind = replace(root_morphind, word_form == "diempati", "empati"),
+         root_pos_morphind = replace(root_pos_morphind, word_form %in% c("diempati"), "n"),
+         suff_morphind = replace(suff_morphind, word_form %in% c("diempati"), "0"),
+         affix_morphind = replace(affix_morphind, word_form %in% c("diempati"), "di-_0"),
+         affix_morphind_wclass = replace(affix_morphind_wclass, 
+                                         word_form  %in% c("diempati"), 
+                                         "di-_n_0"),
+         
          morphind = replace(morphind, word_form %in% c("diperbaiki", "diperbaikii"), "di+per+baik<a>+i_VSP"),
          root_morphind = replace(root_morphind, word_form %in% c("diperbaiki", "diperbaikii"), "baik"),
          root_pos_morphind = replace(root_pos_morphind, word_form %in% c("diperbaiki", "diperbaikii"), "a"),
@@ -183,6 +193,16 @@ verbs <- verbs %>%
          suff_morphind = replace(suff_morphind, word_form %in% c("terpencarkan"), "kan"),
          affix_morphind = replace(affix_morphind, word_form %in% c("terpencarkan"), "ter-_kan"),
          affix_morphind_wclass = replace(affix_morphind_wclass, word_form %in% c("terpencarkan"), "ter-_v_kan"),
+         
+         morphind = if_else(root_morphind == "esa", 
+                            str_replace_all(morphind, "\\<a\\>", "<c>"),
+                            morphind),
+         root_pos_morphind = replace(root_pos_morphind, 
+                                     root_morphind == "esa", "c"),
+         affix_morphind_wclass = if_else(root_morphind == "esa", 
+                                         str_replace_all(affix_morphind_wclass, 
+                                                         "_num_", "_c_"),
+                                         affix_morphind_wclass),
          
          morphind = replace(morphind, word_form %in% c("terperi"), "ter+peri<n>_VSP"),
          root_morphind = replace(root_morphind, word_form %in% c("terperi"), "peri"),
