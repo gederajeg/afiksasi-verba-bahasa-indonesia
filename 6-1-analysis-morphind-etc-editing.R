@@ -14,7 +14,13 @@ verbs <- verbs %>%
                            "ber-tumpu", "ber-tindak", "berkontri-busi", 
                            "berlan", "berandan", "bersaman", 
                            "bersenjata-kelihatan", "berpan", "berbelan-", "bermaian",
-                           "diempat")) %>% 
+                           "diempat", "berain", "berari",
+                           "berbagal", # typo for 'berbagai'? based on the concordance
+                           "berbasi", # typo for 'berbasi'? based on the concordance
+                           "berbah", # name of place
+                           "berbas", # name of place
+                           "berban" # split word for 'berbanding'
+                           )) %>% 
   mutate(morphind = str_replace_all(morphind, "(?<=\\+)jerit\\<v\\>", "jerit<n>"),
          morphind = replace(morphind, word_form=='menjerit-jerit', "meN+jerit<n>_VPA"),
          root_pos_morphind = ifelse(root_morphind == "jerit", "n", root_pos_morphind),
@@ -164,6 +170,10 @@ verbs <- verbs %>%
                             str_replace(morphind, "(?<=\\+)ijin(?=\\<n\\>)", "izin"),
                             morphind),
          
+         morphind = if_else(root_morphind == "bahaya", 
+                            str_replace_all(morphind, "bahaya<a>", "bahaya<n>"),
+                            morphind),
+         
          morphind = replace(morphind, word_form == "memasak", "meN+masak<v>_VSA"),
          root_morphind = replace(root_morphind, word_form %in% c("memasak"), "masak"),
          root_pos_morphind = replace(root_pos_morphind, word_form %in% c("memasak"), "v"),
@@ -219,6 +229,75 @@ verbs <- verbs %>%
          suff_morphind = replace(suff_morphind, word_form %in% c("terperikan"), "kan"),
          affix_morphind = replace(affix_morphind, word_form %in% c("terperikan"), "ter-_kan"),
          affix_morphind_wclass = replace(affix_morphind_wclass, word_form %in% c("terperikan"), "ter-_n_kan"),
+         
+         root_morphind = replace(root_morphind, word_form == "beralih-rupa", "alih rupa"),
+         root_morphind = replace(root_morphind, word_form == "beralih-wujud", "alih wujud"),
+         root_morphind = replace(root_morphind, word_form == "beranak-cucu", "anak cucu"),
+         root_morphind = replace(root_morphind, word_form == "beranak-cucu", "anak pinak"),
+         
+         root_morphind = replace(root_morphind, word_form == "berbaik-hati", "baik hati"),
+         root_morphind = replace(root_morphind, word_form == "bercita-rasa", "cita rasa"),
+         
+         root_morphind = replace(root_morphind, root_morphind == "campuraduk", "campur aduk"),
+         root_morphind = replace(root_morphind, word_form == "bercampur-baur", "campur baur"),
+         morphind = replace(morphind, word_form == "bercampur-baur",
+                            "ber+campur baur<v>_VSA"),
+         morphind = replace(morphind, word_form == "bercampur-aduk",
+                            "ber+campur aduk<v>_VSA"),
+         morphind = replace(morphind, word_form == "tercampur-aduk",
+                            "ter+campur aduk<v>_VSP"),
+         root_morphind = replace(root_morphind, word_form %in% c("tercampur-aduk",
+                                                                 "bercampur-aduk"), 
+                                 "campur aduk"),
+         morphind = if_else(root_morphind == "campur aduk",
+                            str_replace_all(morphind, "campuraduk<[av]>", "campur aduk<v>"),
+                            morphind),
+         root_pos_morphind = replace(root_pos_morphind,
+                                     root_morphind == "campur aduk" & root_pos_morphind == "a",
+                                     "v"),
+         affix_morphind_wclass = replace(affix_morphind_wclass,
+                                     root_morphind == "campur aduk" 
+                                     & affix_morphind_wclass == "meN-_a_kan",
+                                     "meN-_v_kan"),
+         
+         root_morphind = replace(root_morphind, morphind == "ber+aneka<a>_VSADASHragam<n>_NSD", "aneka ragam"),
+         root_pos_morphind = replace(root_pos_morphind, morphind == "ber+aneka<a>_VSADASHragam<n>_NSD", "n"),
+         affix_morphind = replace(affix_morphind, morphind == "ber+aneka<a>_VSADASHragam<n>_NSD", "ber-_n_0"),
+         root_morphind = replace(root_morphind, root_morphind == "anekaragam", "aneka ragam"),
+         
+         root_morphind = replace(root_morphind, morphind == "ber+aneka<a>_VSADASHmacam<n>_NSD", "aneka macam"),
+         root_morphind = replace(root_morphind, morphind == "ber+aneka<a>_VSADASHrupa<n>_NSD", "aneka rupa"),
+         root_pos_morphind = replace(root_pos_morphind, 
+                                     morphind %in% c("ber+aneka<a>_VSADASHmacam<n>_NSD",
+                                                     "ber+aneka<a>_VSADASHrupa<n>_NSD"), "n"),
+         affix_morphind = replace(affix_morphind, 
+                                  morphind %in% c("ber+aneka<a>_VSADASHmacam<n>_NSD",
+                                                  "ber+aneka<a>_VSADASHrupa<n>_NSD"), "ber-_n_0"),
+         root_morphind = replace(root_morphind, root_morphind == "anekaragam", "aneka ragam"),
+         
+         morphind = replace(morphind, word_form %in% c("berbasis-bank"), "ber+basis-bank<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berbasis-bank"), "basis-bank"),
+         
+         # word_form = if_else(word_form %in% c("berbeda-bagi", "berbeda-dalam", 
+         #                                      "bercahaya-mungkin", "berburu-meramu",
+         #                                      "bercerita-dengan", "bercerita-entah"),
+         #                     str_replace_all(word_form, "\\-[a-z]+$", ""),
+         #                     word_form),
+         
+         morphind = replace(morphind, word_form %in% c("berazan"), "ber+azan<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berazan"), "azan"),
+         root_pos_morphind = replace(root_pos_morphind, word_form == "berazan", "n"),
+         suff_morphind = replace(suff_morphind, word_form %in% c("berazan"), "0"),
+         affix_morphind = replace(affix_morphind, word_form %in% c("berazan"), "ber-_0"),
+         affix_morphind_wclass = replace(affix_morphind_wclass, word_form %in% c("berazan"), "ber-_n_0"),
+         
+         morphind = replace(morphind, word_form %in% c("berbasa-basi"), "ber+basa basi<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("basabasi"), "basa basi"),
+         
+         morphind = replace(morphind, word_form %in% c("berbulan-madu"), "ber+bulan madu<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berbulan-madu"), "bulan madu"),
+         
+         root_morphind = replace(root_morphind, root_morphind == "ceraiberai", "cerai berai"),
          
          morphind = replace(morphind, word_form %in% c("terperinci"), "ter+per+rinci<a>_VSP"),
          root_morphind = replace(root_morphind, word_form %in% c("terperinci"), "rinci"),
