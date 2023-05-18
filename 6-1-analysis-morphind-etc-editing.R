@@ -1,6 +1,14 @@
 # script to edit morphind tag, wordclass, etc. from within the 6-analysis.R data
 verbs <- verbs %>% 
   filter(!word_form %in% c("memperikan", "dipertim", "dipin",
+                           "beradaan", # split from "keberadaan"
+                           "berbedaan", # typo of "perbedaan"
+                           "berbuatan", # typo of perbuatan
+                           "berdayaan", # split from pemberdayaan (peN-/-an) and ketidakberdayaan (ke-/-an)
+                           "berdin", # typo for berdiri
+                           "bergan", # split typo for "bergantung"
+                           "beredan", # typo for beredar
+                           "bergen", # place name Bergen in Norway
                            "berdoa-menataptersenyum-berjalan", "berkai-kali", "berusahan",
                            "teras-stupa", "terdidik-tercerahkan", "termi-nologi", 
                            "tergan-tung", "terlintas-linlas", "terburu-burumerealisasi",
@@ -213,6 +221,32 @@ verbs <- verbs %>%
                                          str_replace_all(affix_morphind_wclass, 
                                                          "_num_", "_c_"),
                                          affix_morphind_wclass),
+         
+         morphind = replace(morphind, word_form %in% c("bergeliat-geliut"), "ber+geliat-geliut<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("bergeliat-geliut"), "geliat-geliut"),
+         
+         morphind = replace(morphind, word_form %in% c("berkaca-mata"), "ber+kacamata<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berkaca-mata"), "kacamata"),
+         
+         morphind = replace(morphind, word_form %in% c("bercocok-tanam"), "ber+cocok tanam<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("bercocok-tanam"), "cocok tanam"),
+         root_pos_morphind = replace(root_pos_morphind, word_form == "bercocok-tanam", "n"),
+         affix_morphind_wclass = replace(affix_morphind_wclass, word_form %in% c("bercocok-tanam"), "ber-_n_0"),
+         
+         morphind = replace(morphind, word_form %in% c("berdin-ding"), "ber+dinding<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berdin-ding"), "dinding"),
+         
+         morphind = replace(morphind, word_form %in% c("berduka-kecewa"), "ber+duka kecewa<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berduka-kecewa"), "duka kecewa"),
+         
+         morphind = replace(morphind, word_form %in% c("berdaya-guna"), "ber+daya guna<n>_VSA"),
+         morphind = str_replace_all(morphind, "dayaguna\\<n\\>", "daya guna<n>"),
+         root_morphind = replace(root_morphind, word_form %in% c("berdaya-guna"), "daya guna"),
+         root_morphind = replace(root_morphind, root_morphind %in% c("dayaguna"), "daya guna"),
+         morphind = replace(morphind, word_form %in% c("berdaya-cipta"), "ber+daya cipta<n>_VSA"),
+         
+         morphind = replace(morphind, word_form %in% c("berdaya-kuasa"), "ber+daya kuasa<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berdaya-kuasa"), "daya kuasa"),
          
          morphind = replace(morphind, word_form %in% c("terperi"), "ter+peri<n>_VSP"),
          root_morphind = replace(root_morphind, word_form %in% c("terperi"), "peri"),
