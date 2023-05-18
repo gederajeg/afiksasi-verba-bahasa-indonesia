@@ -46,7 +46,7 @@ words_use_in_corpus <- function(freqlist_df = freqlist_all,
                           context_char = context_char, 
                           to_lower_corpus = to_lower_conc)) |> 
       map2_df(.y = genres, ~mutate(., GENRE = .y))
-    return(usages_conc |> .[sample(1:nrow(.)), ])
+    return(usages_conc[sample(1:nrow(usages_conc)), ])
   }
 }
 
