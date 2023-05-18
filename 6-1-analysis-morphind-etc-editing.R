@@ -244,6 +244,7 @@ verbs <- verbs %>%
          root_morphind = replace(root_morphind, word_form %in% c("berdaya-guna"), "daya guna"),
          root_morphind = replace(root_morphind, root_morphind %in% c("dayaguna"), "daya guna"),
          morphind = replace(morphind, word_form %in% c("berdaya-cipta"), "ber+daya cipta<n>_VSA"),
+         root_morphind = replace(root_morphind, word_form %in% c("berdaya-cipta"), "daya cipta"),
          
          morphind = replace(morphind, word_form %in% c("berdaya-kuasa"), "ber+daya kuasa<n>_VSA"),
          root_morphind = replace(root_morphind, word_form %in% c("berdaya-kuasa"), "daya kuasa"),
