@@ -1,7 +1,7 @@
 # Kode pemrograman untuk analisis kuantitatif pada makalah
 # "Afiksasi Verba dalam Bahasa Indonesia"
 # penulis: Gede Primahadi Wijaya Rajeg & Karlina Denistia (2022) 
-# Tautan repositori: https://doi.org/10.17605/OSF.IO/NUXD4
+# Tautan repositori: https://doi.org/10.17605/OSF.IO/NUXD4 -- NB: reader can skip codes from lines 14 - 24, and line 58. Run the codes from line 6-10, line 13, then jump to lines 28-45, and finally run all codes from lines 61 until the end. 
 
 library(tidyverse)
 library(gridExtra)
