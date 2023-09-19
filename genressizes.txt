@@ -1,0 +1,13 @@
+genres	genre_size
+Koran	1017422
+Majalah	1697870
+Cerpen	1175226
+Novel	1253595
+Buku_Teks	1707569
+Jurnal	1637712
+Disertasi_Tesis_Skripsi	1595030
+Biografi	1644005
+Populer	1740642
+Perundang_undangan	1530914
+Laman_Resmi	1354123
+Surat_Resmi	1749335
